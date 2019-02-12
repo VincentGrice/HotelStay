@@ -1,5 +1,5 @@
 ### Project Overview
-To Develop an application that an user reserve their hotel room.
+To Develop an application for Hotel Bookings and Reservations.
 
 ### Why This Project?
 To become proficient and adapt previous learned skills towards C# ASP.NET Core.
