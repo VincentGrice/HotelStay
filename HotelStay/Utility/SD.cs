@@ -7,7 +7,7 @@ namespace HotelStay.Utility
 {
     public class SD
     {
-        public const string DefaultRoomImage = "default_room.jpg";
-        public const string ImageFolder = @"image\RoomImage";
+        public const string DefaultRoomImage = "default_room.jpeg";
+        public const string ImageFolder = @"images\RoomImage";
     }
 }

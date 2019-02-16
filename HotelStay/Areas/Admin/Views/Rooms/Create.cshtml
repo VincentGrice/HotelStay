@@ -1,0 +1,90 @@
+﻿@model HotelStay.Models.ViewModels.RoomsViewModel
+@using HotelStay.Extensions
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<h2 class="text-info">Create Room </h2>
+
+<form method="post" enctype="multipart/form-data" asp-action="Create">
+    <div class="p-4 border rounded">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Rooms.Name"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Rooms.Name" class="form-control" />
+            </div>
+            <span asp-validation-for="Rooms.Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Rooms.Price"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Rooms.Price" class="form-control" />
+            </div>
+            <span asp-validation-for="Rooms.Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Rooms.Image"></label>
+            </div>
+            <div class="col-5">
+                <input type="file" name="files" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="RoomTypes"></label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.Rooms.RoomTypeId" asp-items="Model.RoomTypes.ToSelectListItem(Model.Rooms.RoomTypeId)" class="form-control"></select>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="RoomTags"></label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.Rooms.RoomTagsID" asp-items="Model.RoomTags.ToSelectListItem(Model.Rooms.RoomTagsID)" class="form-control"></select>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Rooms.Available"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Rooms.Available" type="checkbox" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Rooms.NonSmoking"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Rooms.NonSmoking" type="checkbox" class="form-control" />
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Create" />
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
