@@ -6,14 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20190215233549_RoomTagModel.cs" />
+    <Compile Remove="Data\Migrations\20190215233549_RoomTagModel.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190215234911_RoomCS.cs" />
+    <Compile Remove="Data\Migrations\20190215234911_RoomCS.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.7" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +32,10 @@
     <Content Update="Areas\Customer\Views\_ViewStart.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\RoomImage\" />
   </ItemGroup>
 
 </Project>

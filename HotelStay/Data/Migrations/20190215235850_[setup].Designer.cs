@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelStay.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190215164948_SpecialTags")]
-    partial class SpecialTags
+    [Migration("20190215235850_[setup]")]
+    partial class setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,49 @@ namespace HotelStay.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("HotelStay.Models.Rooms", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Available");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("NonSmoking");
+
+                    b.Property<double>("Price");
+
+                    b.Property<int>("RoomTypeId");
+
+                    b.Property<int>("SpecialTagsID");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomTypeId");
+
+                    b.HasIndex("SpecialTagsID");
+
+                    b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("HotelStay.Models.RoomTags", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoomTags");
+                });
 
             modelBuilder.Entity("HotelStay.Models.RoomTypes", b =>
                 {
@@ -198,6 +241,19 @@ namespace HotelStay.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("HotelStay.Models.Rooms", b =>
+                {
+                    b.HasOne("HotelStay.Models.RoomTypes", "RoomTypes")
+                        .WithMany()
+                        .HasForeignKey("RoomTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HotelStay.Models.RoomTags", "SpecialTags")
+                        .WithMany()
+                        .HasForeignKey("SpecialTagsID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

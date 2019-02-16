@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace HotelStay.Models
 {
-    public class SpecialTags
+    public class RoomTags
     {
         public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
+
     }
 }

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<HotelStay.Models.Rooms>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br /><br />
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Room List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info">&nbsp;<i class="fas fa-plus"></i> New Room</a>
+    </div>
+</div>
+
+<br />
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(m => m.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Available)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.RoomTypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.RoomTags.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.NonSmoking)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Available)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.RoomTypes.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.RoomTags.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.NonSmoking)
+            </td>
+            <td>
+                <partial name="_TableButtonPartial" model="item.Id" />
+            </td>
+        </tr>
+        }
+    </table>
+</div>
+

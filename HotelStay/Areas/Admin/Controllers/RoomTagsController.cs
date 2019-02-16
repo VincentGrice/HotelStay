@@ -9,18 +9,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace HotelStay.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class SpecialTagsController : Controller
+    public class RoomTagsController : Controller
     {
         private readonly ApplicationDbContext _db;
         //Dependency Injection
-        public SpecialTagsController(ApplicationDbContext db)
+        public RoomTagsController(ApplicationDbContext db)
         {
             _db = db;
         }
         
         public IActionResult Index()
         {
-            return View(_db.SpecialTags.ToList());
+            return View(_db.RoomTags.ToList());
         }
 
         //GET Create Action Method
@@ -32,16 +32,16 @@ namespace HotelStay.Areas.Admin.Controllers
         //POST Create Action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(SpecialTags specialTags)
+        public async Task<IActionResult> Create(RoomTags roomTags)
         {
             if (ModelState.IsValid)
             {
-                _db.Add(specialTags);
+                _db.Add(roomTags);
                 //use await keyword when using async methods
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(specialTags);
+            return View(roomTags);
         }
 
         //GET Edit Action Method
@@ -51,31 +51,31 @@ namespace HotelStay.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var specialTag = await _db.SpecialTags.FindAsync(id);
-            if (specialTag == null)
+            var roomTag = await _db.RoomTags.FindAsync(id);
+            if (roomTag == null)
             {
                 return NotFound();
             }
 
-            return View(specialTag);
+            return View(roomTag);
         }
 
         //POST Edit Action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, SpecialTags specialTags)
+        public async Task<IActionResult> Edit(int id, RoomTags roomTags)
         {
-            if (id != specialTags.Id)
+            if (id != roomTags.Id)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                _db.Update(specialTags);
+                _db.Update(roomTags);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(specialTags);
+            return View(roomTags);
         }
 
         //GET Details Action Method
@@ -85,13 +85,13 @@ namespace HotelStay.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var specialTag = await _db.SpecialTags.FindAsync(id);
-            if (specialTag == null)
+            var roomTag = await _db.RoomTags.FindAsync(id);
+            if (roomTag == null)
             {
                 return NotFound();
             }
 
-            return View(specialTag);
+            return View(roomTag);
         }
 
         //GET Delete Action Method
@@ -101,13 +101,13 @@ namespace HotelStay.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var specialTag = await _db.SpecialTags.FindAsync(id);
-            if (specialTag == null)
+            var roomTag = await _db.RoomTags.FindAsync(id);
+            if (roomTag == null)
             {
                 return NotFound();
             }
 
-            return View(specialTag);
+            return View(roomTag);
         }
 
         //POST Delete Action Method
@@ -116,8 +116,8 @@ namespace HotelStay.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
 
-            var specialTags = await _db.SpecialTags.FindAsync(id);
-            _db.SpecialTags.Remove(specialTags);
+            var roomTags = await _db.RoomTags.FindAsync(id);
+            _db.RoomTags.Remove(roomTags);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
 
