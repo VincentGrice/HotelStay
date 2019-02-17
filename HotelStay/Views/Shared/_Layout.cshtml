@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using HotelStay.Extensions
+@using HotelStay.Utility
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -19,15 +25,38 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top mb-4">  
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top mb-4">
         <a class="navbar-brand" href="#">Hotel Stay</a>
-        <div class="collapse navbar-collapse" >
+        <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="RoomTypes" asp-action="Index">Room Types</a></li>
                 <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="RoomTags" asp-action="Index">Room Tags</a></li>
                 <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Rooms" asp-action="Index">Rooms</a></li>
+
+                @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
+                {
+                    <li style="color:white;">
+                        <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> &nbsp;
+                            @{
+                                var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart").Count;
+                            }
+                            (@count)
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li style="color:white;">
+                        <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> &nbsp;
+                           
+                            (0)
+                        </a>
+                    </li>
+                }
             </ul>
-            
+
         </div>
         <div>
             <partial name="_LoginPartial" />
@@ -42,7 +71,7 @@
 
 
 
- 
+
 
     <partial name="_CookieConsentPartial" />
 

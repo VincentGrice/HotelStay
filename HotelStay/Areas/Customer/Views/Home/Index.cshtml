@@ -1,5 +1,25 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<HotelStay.Models.Rooms>
 
+<br /><br />
 
+<div class="row">
+    @foreach (var room in Model)
+    {
+        <div class="col-md-4 col-sm-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <label style="font-size:23px;color:steelblue;">@room.Name</label>
+                    </h4>
+                </div>
+                <img class="card-img-top img-fluid" style="height:200px;width:100%;object-fit:cover;" src="@room.Image"/>
+                <div class="card-body justify-content-between align-content-center">
+                    <div class="btn-group">
+                        <label style="font-size:20px; color:#a51313"><b>$@room.Price</b>/night</label>
+                    </div>
+                    <a asp-action="Details" asp-controller="Home" class="btn btn-success pull-right btn-outline-info" asp-route-id="@room.Id" >View Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
