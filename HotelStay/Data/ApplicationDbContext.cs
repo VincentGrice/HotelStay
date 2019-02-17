@@ -16,6 +16,9 @@ namespace HotelStay.Data
 
         public DbSet<RoomTypes> RoomTypes { get; set; }
         public DbSet<RoomTags> RoomTags { get; set; }
-        public DbSet<Rooms>Rooms { get; set; }
+        public DbSet<Rooms> Rooms { get; set; }
+
+        public DbSet<Reservations> Reservations { get; set; }
+        public DbSet<RoomsSelectedForAppointment> RoomsSelectedForAppointments { get; set; }
     }
 }
