@@ -199,5 +199,33 @@ namespace HotelStay.Controllers
             return View(RoomsVM);
         }
 
+        //POST : Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            Rooms rooms = await _db.Rooms.FindAsync(id);
+
+            if(rooms == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var uploads = Path.Combine(webRootPath, SD.ImageFolder);
+                var extension = Path.GetExtension(rooms.Image);
+
+                if (System.IO.File.Exists(Path.Combine(uploads, rooms.Id + extension)))
+                {
+                    System.IO.File.Delete(Path.Combine(uploads, rooms.Id + extension));
+                }
+                _db.Rooms.Remove(rooms);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
     }
 }

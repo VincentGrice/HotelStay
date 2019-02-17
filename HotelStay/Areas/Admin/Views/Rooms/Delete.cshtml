@@ -1,7 +1,87 @@
-﻿
+﻿@model HotelStay.Models.ViewModels.RoomsViewModel
+@using HotelStay.Extensions
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
+<br />
+<h2 class="text-info">Delete Room </h2>
 
+<form method="post">
+    <div class="p-4 border rounded row">
+        <input hidden asp-for="Rooms.Id" />
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Rooms.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Rooms.Name" readonly class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Rooms.Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Rooms.Price" readonly class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4 mr-3">
+                    <label asp-for="RoomTypes"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Rooms.RoomTypes.Name" readonly class="form-control" />
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4 mr-3">
+                    <label asp-for="RoomTags"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Rooms.RoomTags.Name" readonly class="form-control" />
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Rooms.Available"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Rooms.Available" readonly type="checkbox" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Rooms.NonSmoking" class="mx-auto"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Rooms.NonSmoking" readonly type="checkbox" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-3">
+            <img src="@Model.Rooms.Image" style="border-radius:5px;width:100%; border:1px solid #808080" />
+        </div>
+
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-danger" value="Delete" />
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

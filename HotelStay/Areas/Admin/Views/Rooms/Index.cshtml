@@ -47,7 +47,7 @@
                 @Html.DisplayFor(m => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(m => item.Price)
+                @String.Format("{0:c}", item.Price)
             </td>
             <td>
                 @Html.DisplayFor(m => item.Available)
@@ -56,7 +56,10 @@
                 @Html.DisplayFor(m => item.RoomTypes.Name)
             </td>
             <td>
+                @if (!item.RoomTags.Name.Equals("--None--"))
+                {
                 @Html.DisplayFor(m => item.RoomTags.Name)
+                }
             </td>
             <td>
                 @Html.DisplayFor(m => item.NonSmoking)
