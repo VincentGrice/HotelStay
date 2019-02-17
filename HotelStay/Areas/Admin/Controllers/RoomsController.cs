@@ -87,8 +87,8 @@ namespace HotelStay.Controllers
             {
                 //when user does not upload image
                 var uploads = Path.Combine(webRootPath,SD.ImageFolder+@"\" + SD.DefaultRoomImage);
-                System.IO.File.Copy(uploads, webRootPath + @"\" + SD.ImageFolder + @"\" + RoomsVM.Rooms.Id + "jpeg");
-                roomsFromDb.Image = @"\" + SD.ImageFolder + RoomsVM.Rooms.Id + "jepg";
+                System.IO.File.Copy(uploads, webRootPath + @"\" + SD.ImageFolder + @"\" + RoomsVM.Rooms.Id + "jpg");
+                roomsFromDb.Image = @"\" + SD.ImageFolder + RoomsVM.Rooms.Id + "jpg";
 
             }
             await _db.SaveChangesAsync();
@@ -113,5 +113,91 @@ namespace HotelStay.Controllers
 
             return View(RoomsVM);
         }
+
+        //POST : Edit Room
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit (int id)
+        {
+            if (ModelState.IsValid)
+            {
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+
+                var roomFromDb = _db.Rooms.Where(m => m.Id == RoomsVM.Rooms.Id).FirstOrDefault();
+
+                if (files.Count > 0 && files[0] != null)
+                {
+                    //if user uploads a new image
+                    var uploads = Path.Combine(webRootPath, SD.ImageFolder);
+                    var extension_new = Path.GetExtension(files[0].FileName);
+                    var extension_old = Path.GetExtension(roomFromDb.Image);
+
+                    if (System.IO.File.Exists(Path.Combine(uploads, RoomsVM.Rooms.Id + extension_old)))
+                    {
+                        System.IO.File.Delete(Path.Combine(uploads, RoomsVM.Rooms.Id + extension_old));
+                    }
+                    using (var filestream = new FileStream(Path.Combine(uploads, RoomsVM.Rooms.Id + extension_new), FileMode.Create))
+                    {
+                        files[0].CopyTo(filestream);
+                    }
+                    RoomsVM.Rooms.Image = @"\" + SD.ImageFolder + @"\" + RoomsVM.Rooms.Id + extension_new;
+                }
+
+                if (RoomsVM.Rooms.Image != null)
+                {
+                    roomFromDb.Image = RoomsVM.Rooms.Image;
+                }
+
+                roomFromDb.Name = RoomsVM.Rooms.Name;
+                roomFromDb.Price = RoomsVM.Rooms.Price;
+                roomFromDb.Available = RoomsVM.Rooms.Available;
+                roomFromDb.RoomTypeId = RoomsVM.Rooms.RoomTypeId;
+                roomFromDb.RoomTagsID = RoomsVM.Rooms.RoomTagsID;
+                roomFromDb.NonSmoking = RoomsVM.Rooms.NonSmoking;
+                await _db.SaveChangesAsync();
+                
+
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(RoomsVM);
+        }
+
+        //GET : Details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            RoomsVM.Rooms = await _db.Rooms.Include(m => m.RoomTags).Include(m => m.RoomTypes).SingleOrDefaultAsync(m => m.Id == id);
+
+            if (RoomsVM.Rooms == null)
+            {
+                return NotFound();
+            }
+
+            return View(RoomsVM);
+        }
+
+        //GET : Delete
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            RoomsVM.Rooms = await _db.Rooms.Include(m => m.RoomTags).Include(m => m.RoomTypes).SingleOrDefaultAsync(m => m.Id == id);
+
+            if (RoomsVM.Rooms == null)
+            {
+                return NotFound();
+            }
+
+            return View(RoomsVM);
+        }
+
     }
 }

@@ -96,7 +96,7 @@ namespace HotelStay.Areas.Admin.Controllers
         }
 
         //GET Delete Action Method
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {

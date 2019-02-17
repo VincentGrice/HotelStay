@@ -1,0 +1,80 @@
+﻿@model HotelStay.Models.ViewModels.RoomsViewModel
+@using HotelStay.Extensions
+
+
+<br />
+<h2 class="text-info">Room Details</h2>
+
+    <div class="p-4 border rounded row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Rooms.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Rooms.Name" readonly class="form-control" />
+                </div>
+                <span asp-validation-for="Rooms.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Rooms.Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Rooms.Price" readonly class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4 mr-3">
+                    <label asp-for="RoomTypes"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Rooms.RoomTypes.Name" readonly class="form-control"/>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4 mr-3">
+                    <label asp-for="RoomTags"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Rooms.RoomTags.Name" readonly class="form-control" />
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Rooms.Available"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Rooms.Available" readonly type="checkbox" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Rooms.NonSmoking" class="mx-auto"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Rooms.NonSmoking" readonly type="checkbox" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-3">
+            <img src="@Model.Rooms.Image" style="border-radius:5px;width:100%; border:1px solid #808080" />
+        </div>
+
+        <br />
+        <div class="form-group">
+            <a asp-action="Edit" class="btn btn-success" asp-route-id="@Model.Rooms.Id">Edit</a>
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
