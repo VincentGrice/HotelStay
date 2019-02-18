@@ -34,8 +34,10 @@ namespace HotelStay.Areas.Admin.Controllers
             var userFromDb = await _db.ApplicationUser.FindAsync(id);
             if (userFromDb == null)
             {
-                return View(userFromDb);
+                return NotFound();
             }
+
+            return View(userFromDb);
            
         }
 
@@ -60,6 +62,35 @@ namespace HotelStay.Areas.Admin.Controllers
             }
 
             return View(applicationUser);
+        }
+
+        //GET : Delete
+        public async Task<IActionResult>Delete(string id)
+        {
+            if(id == null || id.Trim().Length == 0)
+            {
+                return NotFound();
+            }
+
+            var userFromDb = await _db.ApplicationUser.FindAsync(id);
+            if(userFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(userFromDb);
+        }
+
+        //POST : Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(string id, ApplicationUser applicationUser)
+        {
+            ApplicationUser userFromDb = _db.ApplicationUser.Where(u => u.Id == id).FirstOrDefault();
+            userFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
+
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
