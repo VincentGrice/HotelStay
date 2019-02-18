@@ -12,7 +12,7 @@
         <div class="container border border-secondary rounded" style="padding:15px;">
             <div class="row">
                 <div class="col-md-12" style="border-right:1px solid #bbb9b9;">
-                    <table class="table table-striped table-responsive" style="width100%;">
+                    <table class="table table-striped table-responsive" style="width:100%;">
                         <tr>
                             <th style="text-align:center;" width="20%"></th>
                             <th style="text-align:center;">
@@ -53,11 +53,76 @@
                         }
 
                     </table>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <label>Name:</label>
+                            </div>
+                            <div class="col-12">
+                                <input asp-for="@Model.Reservations.CustomerName" class="form-control" />
+                            </div>
+                            <div class="col-12">
+                                <label>Phone Number:</label>
+                            </div>
+                            <div class="col-12">
+                                <input asp-for="@Model.Reservations.CustomerPhoneNumber" class="form-control" />
+                            </div>
+                            <div class="col-12">
+                                <label>Email:</label>
+                            </div>
+                            <div class="col-12">
+                                <input asp-for="@Model.Reservations.CustomerEmail" class="form-control" />
+                            </div>
+                            <div class="col-12">
+                                <label>Reservation Date:</label>
+                            </div>
+                            <div class="col-12">
+                                <input asp-for="@Model.Reservations.ReservationDate" value="" type="text" id="datepicker" class="form-control" />
+                            </div>
+                            <div class="col-12">
+                                <label>Check-In Time:</label>
+                            </div>
+                            <div class="col-12">
+                                <input asp-for="@Model.Reservations.ReservationTime" value="" type="text" class="form-control timepicker" />
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <button type="submit" id="btnPlaceOrder" class="btn btn-success mt-2" style="border-radius:20px;">Reserve Room</button>
+                            </div>
+                        </div>
+                    </div>
                   
 
                 </div>
             </div>
         </div>
     }
+    else
+    {
+        <div>
+            <h3>No items added to your shopping cart</h3>
+        </div>
+    }
 </form>
 
+@section Scripts{ 
+    <script>
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '10',
+            maxTime: '6:00pm',
+            defaultTime: '11',
+            startTime: '10:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });
+    </script>
+}

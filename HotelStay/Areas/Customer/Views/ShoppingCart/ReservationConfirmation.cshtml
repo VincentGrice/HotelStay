@@ -1,0 +1,17 @@
+﻿@model HotelStay.Models.ViewModels.ShoppingCartViewModel
+@{
+    ViewData["Title"] = "ReservationConfirmation";
+}
+
+<br />
+<h2 class="text-info">Reservation Confirmation</h2>
+<div class="form-text">
+    Your Reservation has been submitted. We will be in touch shortly. We hope you enjoy your stay !
+</div>
+<br />
+
+<partial name="~/Views/Shared/_ReservationCustomerDetails.cshtml" model="Model.Reservations" />
+<br />
+<partial name="~/Views/Shared/_ReservationRoomDetails.cshtml" model="Model.Rooms" />
+
+<a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-success"> Back to Rooms</a>
