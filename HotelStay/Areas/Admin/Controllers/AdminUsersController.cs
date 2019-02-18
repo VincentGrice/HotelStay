@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HotelStay.Data;
+using HotelStay.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelStay.Areas.Admin.Controllers
@@ -20,6 +21,45 @@ namespace HotelStay.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View(_db.ApplicationUser.ToList());
+        }
+
+        //GET : Edit Method
+        public async Task<IActionResult> Edit(string id)
+        {
+            if(id == null || id.Trim().Length == 0)
+            {
+                return NotFound();
+            }
+
+            var userFromDb = await _db.ApplicationUser.FindAsync(id);
+            if (userFromDb == null)
+            {
+                return View(userFromDb);
+            }
+           
+        }
+
+        //POST : Edit Action Method
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit (string id, ApplicationUser applicationUser)
+        {
+            if(id != applicationUser.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                ApplicationUser userFromDb = _db.ApplicationUser.Where(u => u.Id == id).FirstOrDefault();
+                userFromDb.Name = applicationUser.Name;
+                userFromDb.PhoneNumber = applicationUser.PhoneNumber;
+
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(applicationUser);
         }
     }
 }

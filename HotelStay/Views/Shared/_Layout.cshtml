@@ -36,6 +36,7 @@
                 <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="RoomTypes" asp-action="Index">Room Types</a></li>
                 <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="RoomTags" asp-action="Index">Room Tags</a></li>
                 <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Rooms" asp-action="Index">Rooms</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Users</a></li>
 
                 @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
                 {
@@ -54,7 +55,7 @@
                     <li style="color:white;">
                         <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
                             <i class="fas fa-shopping-cart"></i> &nbsp;
-                           
+
                             (0)
                         </a>
                     </li>
