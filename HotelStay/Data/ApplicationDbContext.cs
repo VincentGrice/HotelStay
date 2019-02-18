@@ -20,5 +20,7 @@ namespace HotelStay.Data
 
         public DbSet<Reservations> Reservations { get; set; }
         public DbSet<RoomsSelectedForReservations> RoomsSelectedForReservations { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }

@@ -9,5 +9,8 @@ namespace HotelStay.Utility
     {
         public const string DefaultRoomImage = "default_room.jpg";
         public const string ImageFolder = @"images\RoomImage";
+
+        public const string AdminEndUser = "Admin";
+        public const string SuperAdminEndUser = "super Admin";
     }
 }
