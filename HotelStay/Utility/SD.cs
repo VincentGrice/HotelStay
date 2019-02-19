@@ -11,6 +11,6 @@ namespace HotelStay.Utility
         public const string ImageFolder = @"images\RoomImage";
 
         public const string AdminEndUser = "Admin";
-        public const string SuperAdminEndUser = "super Admin";
+        public const string SuperAdminEndUser = "Super Admin";
     }
 }

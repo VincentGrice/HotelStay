@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using HotelStay.Data;
 using HotelStay.Models;
+using HotelStay.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelStay.Areas.Admin.Controllers
 {
+    //[Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
     public class RoomTagsController : Controller
     {

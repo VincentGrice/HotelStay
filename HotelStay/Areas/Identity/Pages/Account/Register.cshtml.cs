@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HotelStay.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    //[Authorize(Roles = SD.SuperAdminEndUser)]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -68,7 +68,7 @@ namespace HotelStay.Areas.Identity.Pages.Account
             public string PhoneNumber { get; set; }
 
             [Display(Name="Super Admin")]
-            public bool isSuperAdmin { get; set; }
+            public bool IsSuperAdmin { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -94,7 +94,7 @@ namespace HotelStay.Areas.Identity.Pages.Account
                         await _roleManager.CreateAsync(new IdentityRole(SD.SuperAdminEndUser));
                     }
 
-                    if (Input.isSuperAdmin)
+                    if (Input.IsSuperAdmin)
                     {
                         await _userManager.AddToRoleAsync(user, SD.SuperAdminEndUser);
                     }
@@ -108,17 +108,10 @@ namespace HotelStay.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { userId = user.Id, code = code },
-                        protocol: Request.Scheme);
+                    
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    
+                    return RedirectToAction("Index", "AdminUsers", new { area = "Admin" });
                 }
                 foreach (var error in result.Errors)
                 {

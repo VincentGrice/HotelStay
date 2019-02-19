@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using HotelStay.Data;
 using HotelStay.Models;
+using HotelStay.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelStay.Areas.Admin.Controllers
 {
+    //[Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
     public class AdminUsersController : Controller
     {
@@ -56,6 +59,7 @@ namespace HotelStay.Areas.Admin.Controllers
                 ApplicationUser userFromDb = _db.ApplicationUser.Where(u => u.Id == id).FirstOrDefault();
                 userFromDb.Name = applicationUser.Name;
                 userFromDb.PhoneNumber = applicationUser.PhoneNumber;
+                userFromDb.IsSuperAdmin = applicationUser.IsSuperAdmin;
 
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index));

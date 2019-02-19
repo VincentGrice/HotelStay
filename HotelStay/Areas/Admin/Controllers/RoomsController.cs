@@ -7,12 +7,14 @@ using HotelStay.Data;
 using HotelStay.Models;
 using HotelStay.Models.ViewModels;
 using HotelStay.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelStay.Controllers
 {
+    //[Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
     public class RoomsController : Controller
     {
