@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelStay.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190219051803_correctionForAdmin")]
-    partial class correctionForAdmin
+    [Migration("20190219185158_AdminUserSetup")]
+    partial class AdminUserSetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,9 +35,13 @@ namespace HotelStay.Data.Migrations
 
                     b.Property<DateTime>("ReservationDate");
 
+                    b.Property<string>("SalesPersonId");
+
                     b.Property<bool>("isConfirmed");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SalesPersonId");
 
                     b.ToTable("Reservations");
                 });
@@ -288,13 +292,18 @@ namespace HotelStay.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<bool>("IsSuperAdmin");
-
                     b.Property<string>("Name");
 
                     b.ToTable("ApplicationUser");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("HotelStay.Models.Reservations", b =>
+                {
+                    b.HasOne("HotelStay.Models.ApplicationUser", "SalesPerson")
+                        .WithMany()
+                        .HasForeignKey("SalesPersonId");
                 });
 
             modelBuilder.Entity("HotelStay.Models.Rooms", b =>

@@ -14,6 +14,6 @@ namespace HotelStay.Models
         public string Name { get; set; }
 
         [NotMapped]
-        public bool IsSuperAdmin { get; set; }
+        public bool isSuperAdmin { get; set; }
     }
 }

@@ -40,6 +40,7 @@ namespace HotelStay.Areas.Customer.Controllers
                     ShoppingCartVM.Rooms.Add(room);
                 }
             }
+
             return View(ShoppingCartVM);
         }
 

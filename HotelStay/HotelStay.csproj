@@ -10,6 +10,10 @@
     <Compile Remove="Data\Migrations\20190215233549_RoomTagModel.Designer.cs" />
     <Compile Remove="Data\Migrations\20190215234911_RoomCS.cs" />
     <Compile Remove="Data\Migrations\20190215234911_RoomCS.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190219180005_AddSalesPersonToReservationTable.cs" />
+    <Compile Remove="Data\Migrations\20190219180005_AddSalesPersonToReservationTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190219184941_newAdminUser.cs" />
+    <Compile Remove="Data\Migrations\20190219184941_newAdminUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

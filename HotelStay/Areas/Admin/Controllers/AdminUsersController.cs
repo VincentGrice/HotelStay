@@ -59,7 +59,7 @@ namespace HotelStay.Areas.Admin.Controllers
                 ApplicationUser userFromDb = _db.ApplicationUser.Where(u => u.Id == id).FirstOrDefault();
                 userFromDb.Name = applicationUser.Name;
                 userFromDb.PhoneNumber = applicationUser.PhoneNumber;
-                userFromDb.IsSuperAdmin = applicationUser.IsSuperAdmin;
+                userFromDb.isSuperAdmin = applicationUser.isSuperAdmin;
 
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index));

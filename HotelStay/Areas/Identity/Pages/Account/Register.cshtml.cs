@@ -68,7 +68,7 @@ namespace HotelStay.Areas.Identity.Pages.Account
             public string PhoneNumber { get; set; }
 
             [Display(Name="Super Admin")]
-            public bool IsSuperAdmin { get; set; }
+            public bool isSuperAdmin { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -94,7 +94,7 @@ namespace HotelStay.Areas.Identity.Pages.Account
                         await _roleManager.CreateAsync(new IdentityRole(SD.SuperAdminEndUser));
                     }
 
-                    if (Input.IsSuperAdmin)
+                    if (Input.isSuperAdmin)
                     {
                         await _userManager.AddToRoleAsync(user, SD.SuperAdminEndUser);
                     }
